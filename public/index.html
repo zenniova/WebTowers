@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Monitoring</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+        }
+
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background-color: #ffffff;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        #header h1 {
+            margin: 0;
+            margin-right: 30px;
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 10px 15px;
+            padding-left: 40px;
+            border-radius: 8px;
+            border: 2px solid #e1e8ed;
+            font-size: 15px;
+            width: 250px;
+            background-color: #fff;
+            color: #34495e;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+        }
+
+        .search-box::before {
+            content: "🔍";
+            position: absolute;
+            left: 15px;
+            font-size: 15px;
+            color: #95a5a6;
+        }
+
+        .select-container {
+            position: relative;
+        }
+
+        #siteSelect {
+            appearance: none;
+            -webkit-appearance: none;
+            padding-right: 40px;
+        }
+
+        .select-container::after {
+            content: "▼";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            pointer-events: none;
+            font-size: 12px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            margin-top: 5px;
+        }
+
+        .dropdown-content div {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #f8f9fa;
+            color: #3498db;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        #map {
+            position: absolute;
+            top: 70px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 12px 12px 0 0;
+            margin: 20px;
+        }
+
+        option {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>📍 Dashboard Monitoring</h1>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Cari Site ID...">
+            </div>
+            <div class="select-container">
+                <select id="siteSelect">
+                    <option value="">Pilih Site ID</option>
+                </select>
+                <div class="dropdown-content" id="dropdownContent"></div>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
